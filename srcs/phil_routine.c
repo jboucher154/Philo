@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 10:02:04 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/26 11:58:04 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:07:43 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	eat(t_phil *phil)
 	pthread_mutex_lock(&(phil->meal_mutex));//update eat time
 	phil->last_meal = get_current_time();
 	pthread_mutex_unlock(&(phil->meal_mutex));
-	please_wait(phil->shared->time_to_eat);
+	please_wait(phil->shared->time_to_eat, phil);
 	if (check_vitals(phil) == DEAD)
 		return (DEAD);
 	//unlock mutexes
@@ -68,14 +68,15 @@ void	*phil_routine(void *phil_to_cast)
 
 	protected_print(phil, "is thinking", UNLOCK);
 	if (phil->id % 2 == 0)
-		please_wait(phil->shared->time_to_eat);
+		please_wait(phil->shared->time_to_eat, NULL);
 	while (42)
 	{
 		//eat
 		eat(phil);
 		//sleep
 		protected_print(phil, "is sleeping", UNLOCK);
-		please_wait(phil->shared->time_to_sleep);
+		if (please_wait(phil->shared->time_to_sleep, phil) == DEAD)
+			break ;
 		//think
 		protected_print(phil, "is thinking", UNLOCK);
 	}

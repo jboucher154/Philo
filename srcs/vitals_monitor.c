@@ -50,7 +50,7 @@ void	kill_phil(t_diner *diner, int index)
 void	vitals_monitor(t_diner *diner)
 {
 	int 	i;
-	suseconds_t	delta;
+	long long	delta;
 
 	i = 0;
 	// printf("\nMonitoring vitals......\n\n");//
@@ -71,8 +71,8 @@ void	vitals_monitor(t_diner *diner)
 		// suseconds_t delta_time = current_time - time_to_die;
 		// printf("CHECK 2phil: %i, state: %i, time to die: %i time: %i, delta: %i \n", i + 1, diner->all_the_phils[i]->state, time_to_die, current_time, delta_time);
 		// if (diner->all_the_phils[i]->last_meal <= get_current_time_micro())
-		delta = get_current_time_micro() - diner->all_the_phils[i]->last_meal;
-		if (delta / 1000 >= 0)
+		delta = get_current_time() - diner->all_the_phils[i]->last_meal;
+		if (delta >= 0)
 		{
 			pthread_mutex_unlock(&(diner->all_the_phils[i]->meal_mutex));
 			// kill_phil(diner, i);

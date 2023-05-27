@@ -61,14 +61,14 @@ void	protected_print(t_phil *phil, char *msg, int lock)
 			pthread_mutex_unlock(&(phil->shared->print_mutex));
 			return ;
 		}
-		printf("%i %d %s\n", ((get_current_time_micro() - phil->shared->start) / 1000) , phil->id, msg);
+		printf("%lli %d %s\n", ((get_current_time() - phil->shared->start)) , phil->id, msg);
 		pthread_mutex_unlock(&(phil->shared->print_mutex));
 		return ;
 	}
 	else if (lock == LOCK)
 	{
 		pthread_mutex_lock(&(phil->shared->print_mutex));
-		printf("%i %d %s\n", ((get_current_time_micro() - phil->shared->start) / 1000) , phil->id, msg);
+		printf("%lli %d %s\n", ((get_current_time() - phil->shared->start)) , phil->id, msg);
 		return ;
 	}
 }

@@ -50,7 +50,7 @@ int	eat(t_phil *phil)
 	phil->state = 1;//
 	protected_print(phil, "is eating", UNLOCK);
 	pthread_mutex_lock(&(phil->meal_mutex));//update eat time
-	phil->last_meal = get_current_time_micro() + (phil->shared->time_to_die * 1000); // could add the time to die to this and just compare it to the current time in the monitor
+	phil->last_meal = get_current_time() + (phil->shared->time_to_die); // could add the time to die to this and just compare it to the current time in the monitor
 	pthread_mutex_unlock(&(phil->meal_mutex));
 	please_wait(phil->shared->time_to_eat, phil);
 	if (check_vitals(phil) == DEAD)
@@ -72,7 +72,7 @@ void	*phil_routine(void *phil_to_cast)
 	phil = phil_to_cast;
 
 	// protected_print(phil, "is thinking", UNLOCK);
-	printf("%i %d %s\n", (get_current_time_micro() - phil->shared->start) / 1000, phil->id, "is thinking");
+	printf("%lli %d %s\n", (get_current_time() - phil->shared->start), phil->id, "is thinking");
 	if (phil->id % 2 == 0)
 		please_wait(phil->shared->time_to_eat, NULL);
 	while (42)

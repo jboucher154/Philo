@@ -47,7 +47,7 @@ typedef struct 		s_shared
 	int				full_phils;
 	pthread_mutex_t	full_mutex;
 	pthread_mutex_t	print_mutex;
-	suseconds_t		start;
+	long long		start;
 }					t_shared;
 
 typedef struct 	s_phil
@@ -56,7 +56,7 @@ typedef struct 	s_phil
 	int				state;//
 	pthread_t		phil_thread;
 	int				id;
-	suseconds_t		last_meal;
+	long long		last_meal;
 	int				meals_eaten;
 	pthread_mutex_t meal_mutex;
 	int				vital_sign;

@@ -17,10 +17,10 @@ int	open_diner(t_diner *diner)
 	int					i;
 
 	i = 0;
-	diner->shared->start = get_current_time_micro();
+	diner->shared->start = get_current_time();
 	while (i < diner->shared->nb_philo)
 	{
-		diner->all_the_phils[i]->last_meal = diner->shared->start + diner->shared->time_to_die * 1000;
+		diner->all_the_phils[i]->last_meal = diner->shared->start + diner->shared->time_to_die;
 		if (pthread_create(&(diner->all_the_phils[i]->phil_thread), NULL, phil_routine, diner->all_the_phils[i]))
 			return (print_error("Thread creation failed"));
 		// printf("Thread created\n");

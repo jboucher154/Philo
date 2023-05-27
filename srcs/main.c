@@ -12,19 +12,27 @@
 
 #include "philo.h"
 
-int	phil_startup(t_diner *diner)
+int	open_diner(t_diner *diner)
 {
 	int					i;
 
 	i = 0;
-	diner->shared->start = get_current_time();
+	diner->shared->start = get_current_time_micro();
 	while (i < diner->shared->nb_philo)
 	{
-		diner->all_the_phils[i]->last_meal = diner->shared->start;
+		diner->all_the_phils[i]->last_meal = diner->shared->start + diner->shared->time_to_die * 1000;
 		if (pthread_create(&(diner->all_the_phils[i]->phil_thread), NULL, phil_routine, diner->all_the_phils[i]))
 			return (print_error("Thread creation failed"));
+		// printf("Thread created\n");
 		i++;
 	}
+	// if (pthread_create(&(diner->vitals_monitor1), NULL, vitals_monitor_one, diner))
+	// 		return (print_error("Thread creation failed"));
+	// if (pthread_create(&(diner->vitals_monitor2), NULL, vitals_monitor_two, diner))
+	// 		return (print_error("Thread creation failed"));
+	// pthread_join(diner->vitals_monitor1, NULL);
+	// pthread_join(diner->vitals_monitor2, NULL);
+	vitals_monitor(diner);
 	return (SUCCESS);
 }
 
@@ -85,7 +93,7 @@ int	main(int argc, char** argv)
 	if (setup_program(&diner, &shared) == ERROR)
 		return(ERROR);
 	print_fork_pointers(&diner);
-	phil_startup(&diner);
+	open_diner(&diner);
 	clean_diner(&diner);
 	return (SUCCESS);
 }

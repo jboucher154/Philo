@@ -31,20 +31,23 @@ suseconds_t	get_current_time_micro(void)
 int	please_wait(int milli_to_wait, t_phil *phil)
 {
 	suseconds_t	end;
+	// long long end;
 
 	end = get_current_time_micro() + (milli_to_wait * 1000);
+	// end = get_current_time() + (milli_to_wait);
 	while (get_current_time_micro() < end)
 	{
 		usleep(500);
 		if (phil && check_vitals(phil) == DEAD)
 		{
 			pthread_mutex_unlock(&(phil->left_fork));
-			pthread_mutex_unlock(phil->right_fork);
+			if (phil->right_fork)
+				pthread_mutex_unlock(phil->right_fork);
 			return (DEAD);
 		}
-		//add checks for death here
 		
 	}
+	printf("FROM WAIT %i\n", end - get_current_time_micro());
 	return (ALIVE);
 }
 
@@ -58,14 +61,14 @@ void	protected_print(t_phil *phil, char *msg, int lock)
 			pthread_mutex_unlock(&(phil->shared->print_mutex));
 			return ;
 		}
-		printf("%llu %d %s\n", get_current_time() - phil->shared->start, phil->id, msg);
+		printf("%i %d %s\n", ((get_current_time_micro() - phil->shared->start) / 1000) , phil->id, msg);
 		pthread_mutex_unlock(&(phil->shared->print_mutex));
 		return ;
 	}
 	else if (lock == LOCK)
 	{
 		pthread_mutex_lock(&(phil->shared->print_mutex));
-		printf("%llu %d %s", get_current_time() - phil->shared->start, phil->id, msg);
+		printf("%i %d %s\n", ((get_current_time_micro() - phil->shared->start) / 1000) , phil->id, msg);
 		return ;
 	}
 }

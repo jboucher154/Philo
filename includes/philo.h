@@ -47,15 +47,16 @@ typedef struct 		s_shared
 	int				full_phils;
 	pthread_mutex_t	full_mutex;
 	pthread_mutex_t	print_mutex;
-	long long		start;
+	suseconds_t		start;
 }					t_shared;
 
 typedef struct 	s_phil
 {
 	struct s_shared *shared;
+	int				state;//
 	pthread_t		phil_thread;
 	int				id;
-	long long		last_meal;
+	suseconds_t		last_meal;
 	int				meals_eaten;
 	pthread_mutex_t meal_mutex;
 	int				vital_sign;
@@ -69,7 +70,8 @@ typedef struct		s_diner
 {
 	struct s_shared	*shared;
 	struct s_phil	**all_the_phils;
-	long long		start;
+	// pthread_t		vitals_monitor1;
+	// pthread_t		vitals_monitor2;
 }					t_diner;
 
 
@@ -89,6 +91,11 @@ int			phil_factory(t_diner *diner);
 void		*phil_routine(void *phil_to_cast);
 int			check_vitals(t_phil *phil);
 
+//vitals monitor
+void	*vitals_monitor_one(void *diner_to_cast);
+void	*vitals_monitor_two(void *diner_to_cast);
+void	vitals_monitor(t_diner *diner);
+
 //utilities_one
 int			ft_atoi(const char *str);
 int			print_error(char *err_msg);
@@ -96,6 +103,7 @@ size_t		ft_strlen(char *str);
 
 //utilities_two
 long long	get_current_time(void);
+suseconds_t	get_current_time_micro(void);
 void		protected_print(t_phil *phil, char *msg, int lock);
 int			please_wait(int milli_to_wait, t_phil *phil);
 

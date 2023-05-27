@@ -30,7 +30,7 @@ int	setup_program(t_diner *diner, t_shared *shared)
 	if (setup_prog_mutexes(diner) == ERROR)
 		return (print_error("mutex intialization failed"));
 	diner->shared->full_phils = 0;
-	diner->start = 0;
+	// diner->start = 0;
 	if (phil_factory(diner) == ERROR)
 	{
 		destroy_prog_mutexes(diner);

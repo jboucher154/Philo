@@ -47,7 +47,7 @@ int	please_wait(int milli_to_wait, t_phil *phil)
 		}
 		
 	}
-	printf("FROM WAIT %i\n", end - get_current_time_micro());
+	// printf("FROM WAIT %i\n", end - get_current_time_micro());
 	return (ALIVE);
 }
 

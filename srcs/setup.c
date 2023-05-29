@@ -31,6 +31,7 @@ int	setup_program(t_diner *diner, t_shared *shared)
 		return (print_error("mutex intialization failed"));
 	diner->shared->full_phils = 0;
 	// diner->start = 0;
+	printf("SHARED before phil_factory nb_philo: %i, time_to_die: %i, time_to_eat: %i, time_to_sleep: %i \n", shared->nb_philo, shared->time_to_die, shared->time_to_eat, shared->time_to_sleep);//
 	if (phil_factory(diner) == ERROR)
 	{
 		destroy_prog_mutexes(diner);

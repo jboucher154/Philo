@@ -17,6 +17,7 @@ static void	get_right_forks(t_diner *diner)
 	int i;
 
 	i = 0;
+	// printf("getting right forks!\n");
 	while (diner->shared->nb_philo > 1 && diner->all_the_phils[i])
 	{
 		if (i == diner->shared->nb_philo - 1)
@@ -99,6 +100,7 @@ int	phil_factory(t_diner *diner)
 	if (phil_malloc(diner) == ERROR)
 		return (ERROR);
 	phils_initialized = init_phils(diner);
+	// printf("PHILS INITIALIZED: %i\n", phils_initialized);
 	if (phils_initialized != SUCCESS)
 	{
 		destroy_phil_mutexes(diner, phils_initialized);

@@ -14,7 +14,7 @@ NAME := philo
 
 CC := CC
 
-CFLAGS := -Wall -Wextra -Werror -I includes #-g #-fsanitize=thread
+CFLAGS := -Wall -Wextra -Werror -I includes -O3 #-g #-fsanitize=thread
 
 INCS := includes/philo.h
 

@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 10:02:04 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/26 12:07:43 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:00:36 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	check_vitals(t_phil *phil)
 	if (phil->vital_sign == DEAD)
 	{
 		pthread_mutex_unlock(&(phil->vitals_mutex));
+		pthread_mutex_unlock(phil->right_fork);
+		pthread_mutex_unlock(&(phil->left_fork));
 		return (DEAD);
 	}
 	pthread_mutex_unlock(&(phil->vitals_mutex));
@@ -47,10 +49,15 @@ int	eat(t_phil *phil)
 		return (DEAD);
 	protected_print(phil, "has taken a fork", UNLOCK);
 	//eat
-	phil->state = 1;//
-	protected_print(phil, "is eating", UNLOCK);
+	// phil->state = 1;//
 	pthread_mutex_lock(&(phil->meal_mutex));//update eat time
-	phil->last_meal = get_current_time() + (phil->shared->time_to_die); // could add the time to die to this and just compare it to the current time in the monitor
+	if (check_vitals(phil) == DEAD)
+		return (DEAD);
+	if (get_current_time() - phil->last_meal < 0)
+	{
+		phil->last_meal = get_current_time() + (phil->shared->time_to_die); // could add the time to die to this and just compare it to the current time in the monitor
+		protected_print(phil, "is eating", UNLOCK);//changed
+	}
 	pthread_mutex_unlock(&(phil->meal_mutex));
 	please_wait(phil->shared->time_to_eat, phil);
 	if (check_vitals(phil) == DEAD)
@@ -74,7 +81,7 @@ void	*phil_routine(void *phil_to_cast)
 	// protected_print(phil, "is thinking", UNLOCK);
 	printf("%lli %d %s\n", (get_current_time() - phil->shared->start), phil->id, "is thinking");
 	if (phil->id % 2 == 0)
-		please_wait(phil->shared->time_to_eat, NULL);
+		please_wait(phil->shared->time_to_eat, phil);
 	while (42)
 	{
 		//eat
@@ -82,12 +89,12 @@ void	*phil_routine(void *phil_to_cast)
 			break ;
 		//sleep
 		protected_print(phil, "is sleeping", UNLOCK);
-		phil->state = 2;//
+		// phil->state = 2;//
 		if (please_wait(phil->shared->time_to_sleep, phil) == DEAD)
 			break ;
 		//think
 		protected_print(phil, "is thinking", UNLOCK);
-		phil->state = 3;//
+		// phil->state = 3;//
 	}
 	// printf("HI from phil %d\n", phil->id);//
 	return (phil_to_cast);

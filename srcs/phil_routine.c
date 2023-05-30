@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 10:02:04 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/30 14:47:56 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:26:56 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	set_full(t_phil *phil)
 int	eat(t_phil *phil)
 {
 	//lock mutexes
+	if (check_vitals(phil) == DEAD)
+		return (DEAD);
 	pthread_mutex_lock(&(phil->left_fork));
 	if (check_vitals(phil) == DEAD)
 		return (DEAD);

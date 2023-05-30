@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:27:12 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/26 11:50:02 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:05:21 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	vitals_monitor(t_diner *diner)
 		// printf("CHECK 2phil: %i, state: %i, time to die: %i time: %i, delta: %i \n", i + 1, diner->all_the_phils[i]->state, time_to_die, current_time, delta_time);
 		// if (diner->all_the_phils[i]->last_meal <= get_current_time_micro())
 		delta = get_current_time() - diner->all_the_phils[i]->last_meal;
+		// printf("CHECK 2 						phil: %i, delta: %lli \n", i + 1, delta);
+		// printf("CHECK 2phil: %i, state: %i, time to die: %i time: %i, delta: %i \n", i + 1, diner->all_the_phils[i]->state, time_to_die, current_time, delta_time);
 		if (delta >= 0)
 		{
 			pthread_mutex_unlock(&(diner->all_the_phils[i]->meal_mutex));

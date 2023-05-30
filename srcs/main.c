@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:47:21 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/30 10:49:33 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:11:36 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	open_diner(t_diner *diner)
 	while (i < diner->shared->nb_philo)
 	{
 		diner->all_the_phils[i]->last_meal = diner->shared->start + diner->shared->time_to_die;
+		// printf("%lli %d %s\n", (get_current_time() - diner->all_the_phils[i]->shared->start), diner->all_the_phils[i]->id, "is thinking");
 		if (pthread_create(&(diner->all_the_phils[i]->phil_thread), NULL, phil_routine, diner->all_the_phils[i]))
 			return (print_error("Thread creation failed"));
 		// printf("Thread created\n");

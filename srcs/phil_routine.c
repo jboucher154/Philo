@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 10:02:04 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/30 14:12:32 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:47:56 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ int	check_vitals(t_phil *phil)
 	}
 	pthread_mutex_unlock(&(phil->vitals_mutex));
 	return (ALIVE);
+}
+
+int	set_full(t_phil *phil)
+{
+	pthread_mutex_lock(&(phil->shared->full_mutex));
+	phil->shared->full_phils += 1;
+	pthread_mutex_unlock(&(phil->shared->full_mutex));
+	return (check_vitals(phil));
 }
 
 int	eat(t_phil *phil)
@@ -46,11 +54,11 @@ int	eat(t_phil *phil)
 	pthread_mutex_lock(&(phil->meal_mutex));//update eat time
 	if (check_vitals(phil) == DEAD)
 		return (DEAD);
-	if (get_current_time() - phil->last_meal < 0)
-	{
+	// if (get_current_time() - phil->last_meal < 0)
+	// {
 		phil->last_meal = get_current_time() + (phil->shared->time_to_die); // could add the time to die to this and just compare it to the current time in the monitor
 		protected_print(phil, "is eating", UNLOCK);//changed
-	}
+	// }
 	pthread_mutex_unlock(&(phil->meal_mutex));
 	please_wait(phil->shared->time_to_eat, phil);
 	if (check_vitals(phil) == DEAD)

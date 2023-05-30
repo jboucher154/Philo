@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:49:17 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/30 12:13:03 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:41:50 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct 		s_shared
 	pthread_mutex_t	full_mutex;
 	pthread_mutex_t	print_mutex;
 	long long		start;
-	int				(*eating_tasks[5]) (struct s_phil *phil);
+	// int				(*eating_tasks[5]) (struct s_phil *phil);
 }					t_shared;
 
 typedef struct 	s_phil

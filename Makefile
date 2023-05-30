@@ -6,7 +6,7 @@
 #    By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/25 17:46:01 by jebouche          #+#    #+#              #
-#    Updated: 2023/05/26 11:27:09 by jebouche         ###   ########.fr        #
+#    Updated: 2023/05/30 11:22:43 by jebouche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC_DIR := srcs
 OBJ_DIR := objs
 
 SRCS := main.c setup.c phil_factory.c phil_routine.c vitals_monitor.c cleanup.c \
-		utilities_two.c utilities_one.c
+		task_list.c utilities_two.c utilities_one.c
 
 SRCS := $(SRCS:%=$(SRC_DIR)/%)
 

@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:47:21 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/26 10:39:13 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/05/30 10:49:33 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	main(int argc, char** argv)
 		return (ERROR);
 	if (setup_program(&diner, &shared) == ERROR)
 		return(ERROR);
-	print_fork_pointers(&diner);
+	// print_fork_pointers(&diner);
 	open_diner(&diner);
 	clean_diner(&diner);
 	return (SUCCESS);

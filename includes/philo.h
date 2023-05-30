@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:49:17 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/26 12:01:04 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/05/30 12:13:03 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct 		s_shared
 	pthread_mutex_t	full_mutex;
 	pthread_mutex_t	print_mutex;
 	long long		start;
+	int				(*eating_tasks[5]) (struct s_phil *phil);
 }					t_shared;
 
 typedef struct 	s_phil
@@ -91,10 +92,16 @@ int			phil_factory(t_diner *diner);
 void		*phil_routine(void *phil_to_cast);
 int			check_vitals(t_phil *phil);
 
+//task list
+int			check_if_full(t_phil *phil);
+int			pick_up_forks(t_phil *phil);
+int			eat_meal(t_phil *phil);
+int			drop_forks(t_phil *phil);
+
 //vitals monitor
-void	*vitals_monitor_one(void *diner_to_cast);
-void	*vitals_monitor_two(void *diner_to_cast);
-void	vitals_monitor(t_diner *diner);
+// void		*vitals_monitor_one(void *diner_to_cast);
+// void		*vitals_monitor_two(void *diner_to_cast);
+void		vitals_monitor(t_diner *diner);
 
 //utilities_one
 int			ft_atoi(const char *str);

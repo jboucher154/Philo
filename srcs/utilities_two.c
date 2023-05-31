@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 09:31:22 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/30 13:43:03 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:20:15 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ int	please_wait(int milli_to_wait, t_phil *phil)
 	// end = get_current_time() + (milli_to_wait);
 	while (get_current_time_micro() < end)
 	{
-		usleep(500);
-		// if (phil && check_vitals(phil) == DEAD)
-		// {
-		// 	pthread_mutex_unlock(&(phil->left_fork));
-		// 	if (phil->right_fork)
-		// 		pthread_mutex_unlock(phil->right_fork);
-		// 	return (DEAD);
-		// }
+		usleep(1000);
+		if (phil && check_vitals(phil) == DEAD)
+		{
+			// pthread_mutex_unlock(&(phil->left_fork));
+			// if (phil->right_fork)
+			// 	pthread_mutex_unlock(phil->right_fork);
+			return (DEAD);
+		}
 		
 	}
 	// printf("FROM WAIT %i\n", end - get_current_time_micro());
-	return (check_vitals(phil));
-	// return (ALIVE);
+	// return (check_vitals(phil));
+	return (ALIVE);
 }
 
 void	protected_print(t_phil *phil, char *msg, int lock)

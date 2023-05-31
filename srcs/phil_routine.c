@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 10:02:04 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/31 10:57:05 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:53:32 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	eat(t_phil *phil)
 	if (check_vitals(phil) == DEAD)
 		return (DEAD);
 	protected_print(phil, "has taken a fork", UNLOCK);
+	if (check_vitals(phil) == DEAD)
+		return (DEAD);
 	if (phil->right_fork)
 		pthread_mutex_lock(phil->right_fork);
 	else
@@ -52,6 +54,8 @@ int	eat(t_phil *phil)
 	if (check_vitals(phil) == DEAD)
 		return (DEAD);
 	protected_print(phil, "has taken a fork", UNLOCK);
+	if (check_vitals(phil) == DEAD)
+		return (DEAD);
 	//eat
 	// phil->state = 1;//
 	pthread_mutex_lock(&(phil->meal_mutex));//update eat time

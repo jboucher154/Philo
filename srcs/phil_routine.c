@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 10:02:04 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/30 18:26:56 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/05/31 10:57:05 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int	check_vitals(t_phil *phil)
 	if (phil->vital_sign == DEAD)
 	{
 		pthread_mutex_unlock(&(phil->vitals_mutex));
-		pthread_mutex_unlock(phil->right_fork);
 		pthread_mutex_unlock(&(phil->left_fork));
+		if (phil->right_fork)
+			pthread_mutex_unlock(phil->right_fork);
 		return (DEAD);
 	}
 	pthread_mutex_unlock(&(phil->vitals_mutex));

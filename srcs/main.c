@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:47:21 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 13:45:05 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:39:13 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ static int	verify_args(t_shared *shared)
 {
 	if (shared->nb_philo <= 0 || shared->nb_philo > 200)
 		return (print_error("number of philosophers must be > 0 and <= 200"));
-	if (shared->time_to_die == 0)
+	if (shared->time_to_die <= 0)
 		return (print_error("time to die must be an integer > 0"));
-	if (shared->time_to_eat == 0)
+	if (shared->time_to_eat <= 0)
 		return (print_error("time to eat must be an integer > 0"));
-	if (shared->time_to_sleep == 0)
+	if (shared->time_to_sleep <= 0)
 		return (print_error("time to sleep must be an integer > 0"));
 	if (shared->nb_eat != UNSET && shared->nb_eat == 0)
 		return (ERROR);

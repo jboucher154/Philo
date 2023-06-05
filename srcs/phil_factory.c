@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:12:40 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/26 10:44:51 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 09:27:54 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	get_right_forks(t_diner *diner)
 	int i;
 
 	i = 0;
-	// printf("getting right forks!\n");
 	while (diner->shared->nb_philo > 1 && diner->all_the_phils[i])
 	{
 		if (i == diner->shared->nb_philo - 1)
@@ -64,7 +63,7 @@ static int	init_phils(t_diner *diner)
 		i++;
 	}
 	if (i < diner->shared->nb_philo)
-		return (i); // use i to determine how many mutexes to destroy
+		return (i);
 	return (SUCCESS);
 }
 
@@ -100,7 +99,6 @@ int	phil_factory(t_diner *diner)
 	if (phil_malloc(diner) == ERROR)
 		return (ERROR);
 	phils_initialized = init_phils(diner);
-	// printf("PHILS INITIALIZED: %i\n", phils_initialized);
 	if (phils_initialized != SUCCESS)
 	{
 		destroy_phil_mutexes(diner, phils_initialized);

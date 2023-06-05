@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 10:02:04 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 09:34:07 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 09:41:16 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	pickup_forks(t_phil *phil)
 
 int	eat(t_phil *phil)
 {
-	if (pickup_forks == DEAD)
+	if (pickup_forks(phil) == DEAD)
 		return (DEAD);
 	pthread_mutex_lock(&(phil->meal_mutex));
 	if (check_vitals(phil) == DEAD)

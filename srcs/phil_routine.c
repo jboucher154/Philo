@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 10:02:04 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 13:24:31 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:39:17 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ int	set_full(t_phil *phil)
 	return (check_vitals(phil));
 }
 
-int	eat(t_phil *phil)
+int	pick_up_forks(t_phil *phil)
 {
-	if (check_vitals(phil) == DEAD)
-		return (DEAD);
 	pthread_mutex_lock(&(phil->left_fork));
 	if (check_vitals(phil) == DEAD)
 		return (DEAD);
@@ -52,7 +50,14 @@ int	eat(t_phil *phil)
 	if (check_vitals(phil) == DEAD)
 		return (DEAD);
 	protected_print(phil, "has taken a fork", UNLOCK);
+	return (check_vitals(phil));
+}
+
+int	eat(t_phil *phil)
+{
 	if (check_vitals(phil) == DEAD)
+		return (DEAD);
+	if (pick_up_forks(phil) == DEAD)
 		return (DEAD);
 	pthread_mutex_lock(&(phil->meal_mutex));
 	if (check_vitals(phil) == DEAD)
@@ -77,7 +82,6 @@ void	*phil_routine(void *phil_to_cast)
 
 	phil = phil_to_cast;
 
-	// printf("%lli %d %s\n", (get_current_time() - phil->shared->start), phil->id, "is thinking");
 	if (phil->id % 2 == 0)
 		please_wait(phil->shared->time_to_eat, phil);
 	while (42)

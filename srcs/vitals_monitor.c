@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:27:12 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/31 11:19:04 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:28:48 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,35 +53,13 @@ void	vitals_monitor(t_diner *diner)
 	long long	delta;
 
 	i = 0;
-	// printf("\nMonitoring vitals......\n\n");//
 	while (i < diner->shared->nb_philo)
 	{
-		// get_current_time();
-		// printf("%lli\n", get_current_time());
-		// printf("asdf %lli\n", get_current_time());
-		// usleep(300);
-		// printf("CHECK 1phil: %i, time to die: %lli time: %lli, \n", i + 1, diner->all_the_phils[i]->last_meal, get_current_time());
-		// printf("CHECK 1phil: %i, time: %lli, \n", i + 1, get_current_time());
 		pthread_mutex_lock(&(diner->all_the_phils[i]->meal_mutex));
-		// printf("CHECK 2phil: %i, time to die: %lli time: %lli, \n", i + 1, diner->all_the_phils[i]->last_meal, get_current_time());
-		// printf("MEAL CHECK %i, time of meal %llu, death timer%i\n", get_current_time() - diner->all_the_phils[i]->last_meal >=  diner->shared->time_to_die, get_current_time() - diner->all_the_phils[i]->last_meal, diner->shared->time_to_die);
-		// if (get_current_time() - diner->all_the_phils[i]->last_meal >=  diner->shared->time_to_die)
-		// suseconds_t time_to_die = diner->all_the_phils[i]->last_meal;
-		// suseconds_t current_time = get_current_time_micro();
-		// suseconds_t delta_time = current_time - time_to_die;
-		// printf("CHECK 2phil: %i, state: %i, time to die: %i time: %i, delta: %i \n", i + 1, diner->all_the_phils[i]->state, time_to_die, current_time, delta_time);
-		// if (diner->all_the_phils[i]->last_meal <= get_current_time_micro())
 		delta = get_current_time() - diner->all_the_phils[i]->last_meal;
-		// printf("CHECK 2 						phil: %i, delta: %lli \n", i + 1, delta);
-		// printf("CHECK 2phil: %i, state: %i, time to die: %i time: %i, delta: %i \n", i + 1, diner->all_the_phils[i]->state, time_to_die, current_time, delta_time);
 		if (delta >= 0)
 		{
 			pthread_mutex_unlock(&(diner->all_the_phils[i]->meal_mutex));
-			// kill_phil(diner, i);
-			// long long int time_to_die = diner->all_the_phils[i]->last_meal;
-			// long long int current_time = get_current_time();
-			// long long int delta_time = current_time - time_to_die;
-			// printf("CHECK 3phil: %i, state: %i, time to die: %lli time: %lli, delta: %lli \n", i + 1, diner->all_the_phils[i]->state, time_to_die, current_time, delta_time);
 			kill_phil(diner, i);
 			break ;
 		}
@@ -92,7 +70,6 @@ void	vitals_monitor(t_diner *diner)
 		if (i == diner->shared->nb_philo)
 			i = 0;
 	}
-	// printf("\nClosing diner......\n\n");//
 	close_diner(diner);
 	pthread_mutex_unlock(&(diner->shared->print_mutex));
 }

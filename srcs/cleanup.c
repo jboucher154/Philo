@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 18:59:14 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/26 09:55:22 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:18:36 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	join_threads(t_diner *diner)
 	}
 	while (i < diner->shared->nb_philo)
 	{
-		pthread_join(diner->all_the_phils[i]->phil_thread, NULL);//error if join issue?
+		pthread_join(diner->all_the_phils[i]->phil_thread, NULL);
 		i++;
 	}
 }

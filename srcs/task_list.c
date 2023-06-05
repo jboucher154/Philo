@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 10:55:53 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/30 11:23:44 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:26:27 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ int	pick_up_forks(t_phil *phil)
 	pthread_mutex_lock(&(phil->left_fork));
 	if (check_vitals(phil) == DEAD)
 		return (DEAD);
-	//print fork taken
 	protected_print(phil, "has taken a fork", UNLOCK);
 	if (check_vitals(phil) == DEAD)
 		return (DEAD);
-	//take right fork
 	if (phil->right_fork)
 		pthread_mutex_lock(phil->right_fork);
 	else
@@ -47,10 +45,10 @@ int	eat_meal(t_phil *phil)
 	protected_print(phil, "is eating", UNLOCK);
 	if (check_vitals(phil) == DEAD)
 		return (DEAD);
-	pthread_mutex_lock(&(phil->meal_mutex));//update eat time
+	pthread_mutex_lock(&(phil->meal_mutex));
 	if (check_vitals(phil) == DEAD)
 		return (DEAD);
-	phil->last_meal = get_current_time() + (phil->shared->time_to_die); // could add the time to die to this and just compare it to the current time in the monitor
+	phil->last_meal = get_current_time() + (phil->shared->time_to_die);
 	pthread_mutex_unlock(&(phil->meal_mutex));
 	if (check_vitals(phil) == DEAD)
 		return (DEAD);

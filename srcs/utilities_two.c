@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 09:31:22 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 09:37:34 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 10:17:58 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	please_wait(int milli_to_wait, t_phil *phil)
 	end = get_current_time_micro() + (milli_to_wait * 1000);
 	while (get_current_time_micro() < end)
 	{
-		usleep(1000);
+		usleep(500);
 		if (phil && check_vitals(phil) == DEAD)
 			return (DEAD);
 	}

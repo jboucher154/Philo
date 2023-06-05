@@ -6,18 +6,32 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:47:21 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 09:26:53 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 10:33:11 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	set_phils_alive(t_diner *diner)
+{
+	int i;
+
+	i = 0;
+	while (i < diner->shared->nb_philo)
+	{
+		pthread_mutex_lock(&(diner->all_the_phils[i]->vitals_mutex));
+		diner->all_the_phils[i]->vital_sign = ALIVE;
+		pthread_mutex_unlock(&(diner->all_the_phils[i]->vitals_mutex));
+		i++;
+	}
+}
 
 int	open_diner(t_diner *diner)
 {
 	int					i;
 
 	i = 0;
-	diner->shared->start = get_current_time();
+	// diner->shared->start = get_current_time();
 	while (i < diner->shared->nb_philo)
 	{
 		diner->all_the_phils[i]->last_meal = diner->shared->start + diner->shared->time_to_die;
@@ -25,6 +39,8 @@ int	open_diner(t_diner *diner)
 			return (print_error("Thread creation failed"));
 		i++;
 	}
+	diner->shared->start = get_current_time();
+	set_phils_alive(diner);
 	vitals_monitor(diner);
 	return (SUCCESS);
 }

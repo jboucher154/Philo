@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 10:02:04 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 09:41:16 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 10:35:18 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,18 @@ void	*phil_routine(void *phil_to_cast)
 	t_phil	*phil;
 
 	phil = phil_to_cast;
-
+	while (42)
+	{
+		pthread_mutex_lock(&(phil->vitals_mutex));
+		if (phil->vital_sign == ALIVE)
+			break ;
+		pthread_mutex_unlock(&(phil->vitals_mutex));
+	}
+	pthread_mutex_unlock(&(phil->vitals_mutex));
 	printf("%lli %d %s\n", (get_current_time() - phil->shared->start), phil->id, "is thinking");
+	pthread_mutex_lock(&(phil->meal_mutex));
+	phil->last_meal = get_current_time() + (phil->shared->time_to_die);
+	pthread_mutex_unlock(&(phil->meal_mutex));
 	if (phil->id % 2 == 0)
 		please_wait(phil->shared->time_to_eat, phil);
 	while (42)

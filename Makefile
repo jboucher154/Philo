@@ -6,7 +6,7 @@
 #    By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/25 17:46:01 by jebouche          #+#    #+#              #
-#    Updated: 2023/05/30 14:50:23 by jebouche         ###   ########.fr        #
+#    Updated: 2023/06/05 10:40:41 by jebouche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := philo
 
 CC := CC
 
-CFLAGS := -Wall -Wextra -Werror -I includes #-O3 #-g -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -I includes -g -fsanitize=thread
 
 INCS := includes/philo.h
 
@@ -23,7 +23,7 @@ SRC_DIR := srcs
 OBJ_DIR := objs
 
 SRCS := main.c setup.c phil_factory.c phil_routine.c vitals_monitor.c cleanup.c \
-		task_list.c utilities_two.c utilities_one.c
+		utilities_two.c utilities_one.c
 
 SRCS := $(SRCS:%=$(SRC_DIR)/%)
 

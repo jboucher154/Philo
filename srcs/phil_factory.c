@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:12:40 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 09:27:54 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 10:25:55 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	init_phils(t_diner *diner)
 		diner->all_the_phils[i]->shared = diner->shared;
 		diner->all_the_phils[i]->id = i + 1;
 		diner->all_the_phils[i]->last_meal = 0;
-		diner->all_the_phils[i]->vital_sign = ALIVE;//
+		diner->all_the_phils[i]->vital_sign = DEAD;
 		diner->all_the_phils[i]->meals_eaten = 0;
 		if (setup_mutexes(diner, i) == ERROR)
 			print_error("mutex intialization failed");

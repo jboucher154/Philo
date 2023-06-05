@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 18:59:14 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 13:33:25 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:45:37 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	destroy_prog_mutexes(t_diner *diner)
 
 void	destroy_phil_mutexes(t_diner *diner, int to_destroy)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < to_destroy)
@@ -37,7 +37,7 @@ void	destroy_phil_mutexes(t_diner *diner, int to_destroy)
 
 void	free_phils(t_diner *diner)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!diner->all_the_phils)
@@ -54,9 +54,9 @@ void	free_phils(t_diner *diner)
 	free (diner->all_the_phils);
 }
 
-void	join_threads(t_diner *diner)
+static void	join_threads(t_diner *diner)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < diner->shared->nb_philo)

@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 10:02:04 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 13:39:17 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:48:36 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int	eat(t_phil *phil)
 	pthread_mutex_unlock(phil->right_fork);
 	pthread_mutex_unlock(&(phil->left_fork));
 	phil->meals_eaten++;
-	if (phil->shared->nb_eat != UNSET && phil->meals_eaten == phil->shared->nb_eat)
+	if (phil->shared->nb_eat != UNSET && phil->meals_eaten == \
+	phil->shared->nb_eat)
 		set_full(phil);
 	return (check_vitals(phil));
 }
@@ -81,7 +82,6 @@ void	*phil_routine(void *phil_to_cast)
 	t_phil	*phil;
 
 	phil = phil_to_cast;
-
 	if (phil->id % 2 == 0)
 		please_wait(phil->shared->time_to_eat, phil);
 	while (42)

@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:27:12 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 13:28:48 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:49:53 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	close_diner(t_diner *diner)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < diner->shared->nb_philo)
@@ -40,7 +40,6 @@ int	all_full(t_diner *diner)
 
 void	kill_phil(t_diner *diner, int index)
 {
-	
 	pthread_mutex_lock(&(diner->all_the_phils[index]->vitals_mutex));
 	diner->all_the_phils[index]->vital_sign = DEAD;
 	pthread_mutex_unlock(&(diner->all_the_phils[index]->vitals_mutex));
@@ -49,7 +48,7 @@ void	kill_phil(t_diner *diner, int index)
 
 void	vitals_monitor(t_diner *diner)
 {
-	int 	i;
+	int			i;
 	long long	delta;
 
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:49:17 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 13:35:08 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:43:27 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ Optional: [number_of_times_each_philosopher_must_eat]\n"
 //for usleep 
 # include <unistd.h>
 
-typedef struct 		s_shared
+typedef struct s_shared
 {
 	int				nb_philo;
 	int				time_to_die;
@@ -50,27 +50,25 @@ typedef struct 		s_shared
 	long long		start;
 }					t_shared;
 
-typedef struct 	s_phil
+typedef struct s_phil
 {
-	struct s_shared *shared;
+	struct s_shared	*shared;
 	pthread_t		phil_thread;
 	int				id;
 	long long		last_meal;
 	int				meals_eaten;
-	pthread_mutex_t meal_mutex;
+	pthread_mutex_t	meal_mutex;
 	int				vital_sign;
-	pthread_mutex_t vitals_mutex;
+	pthread_mutex_t	vitals_mutex;
 	pthread_mutex_t	left_fork;
-	pthread_mutex_t *right_fork;
+	pthread_mutex_t	*right_fork;
 }				t_phil;
 
-
-typedef struct		s_diner
+typedef struct s_diner
 {
 	struct s_shared	*shared;
 	struct s_phil	**all_the_phils;
 }					t_diner;
-
 
 //setup
 int			setup_program(t_diner *diner, t_shared *shared);

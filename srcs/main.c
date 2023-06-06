@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:47:21 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/06 15:43:27 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:38:40 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ int	main(int argc, char **argv)
 		return (ERROR);
 	if (setup_program(&diner, &shared) == ERROR)
 		return (ERROR);
-	open_diner(&diner);
+	if (open_diner(&diner) == ERROR)
+		close_diner(&diner);
 	clean_diner(&diner);
 	return (SUCCESS);
 }

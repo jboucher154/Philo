@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:49:17 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/06 16:35:38 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:41:28 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int			check_vitals(t_phil *phil);
 
 //vitals monitor
 void		vitals_monitor(t_diner *diner);
+void		close_diner(t_diner *diner);
 
 //utilities_one
 int			ft_atoi(const char *str);

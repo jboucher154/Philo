@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:47:21 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 16:39:13 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:43:27 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	open_diner(t_diner *diner)
 {
-	int					i;
+	int	i;
 
 	i = 0;
 	diner->shared->start = get_current_time();

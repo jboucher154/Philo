@@ -6,13 +6,13 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 18:41:11 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 13:25:50 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:44:41 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	setup_prog_mutexes(t_diner *diner)
+static int	setup_prog_mutexes(t_diner *diner)
 {
 	if (pthread_mutex_init(&(diner->shared->print_mutex), NULL) != SUCCESS)
 		return (ERROR);

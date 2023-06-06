@@ -6,7 +6,7 @@
 #    By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/25 17:46:01 by jebouche          #+#    #+#              #
-#    Updated: 2023/06/05 13:50:09 by jebouche         ###   ########.fr        #
+#    Updated: 2023/06/06 18:40:12 by jebouche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := philo
 
 CC := CC
 
-CFLAGS := -Wall -Wextra -Werror -I includes #-O3 #-g -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -I includes
 
 INCS := includes/philo.h
 

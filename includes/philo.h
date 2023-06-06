@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:49:17 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/06 16:34:29 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:35:38 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,6 @@ int			phil_factory(t_diner *diner);
 //phil routine
 void		*phil_routine(void *phil_to_cast);
 int			check_vitals(t_phil *phil);
-
-//task list
-int			check_if_full(t_phil *phil);
-int			pick_up_forks(t_phil *phil);
-int			eat_meal(t_phil *phil);
-int			drop_forks(t_phil *phil);
 
 //vitals monitor
 void		vitals_monitor(t_diner *diner);

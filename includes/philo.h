@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:49:17 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 13:43:27 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:28:27 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ size_t		ft_strlen(char *str);
 
 //utilities_two
 long long	get_current_time(void);
-suseconds_t	get_current_time_micro(void);
 void		protected_print(t_phil *phil, char *msg, int lock);
 int			please_wait(int milli_to_wait, t_phil *phil);
 

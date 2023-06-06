@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:27:12 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 13:49:53 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:32:36 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	close_diner(t_diner *diner)
 	}
 }
 
-int	all_full(t_diner *diner)
+static int	all_full(t_diner *diner)
 {
 	pthread_mutex_lock(&(diner->shared->full_mutex));
 	if (diner->shared->full_phils == diner->shared->nb_philo)
@@ -38,7 +38,7 @@ int	all_full(t_diner *diner)
 	return (0);
 }
 
-void	kill_phil(t_diner *diner, int index)
+static void	kill_phil(t_diner *diner, int index)
 {
 	pthread_mutex_lock(&(diner->all_the_phils[index]->vitals_mutex));
 	diner->all_the_phils[index]->vital_sign = DEAD;

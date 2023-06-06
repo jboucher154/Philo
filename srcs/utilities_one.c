@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilities.c                                        :+:      :+:    :+:   */
+/*   utilities_one.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:57:06 by jebouche          #+#    #+#             */
-/*   Updated: 2023/05/25 19:48:41 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:34:12 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_atoi(const char *str)
 	return (sum * sign);
 }
 
-size_t	ft_strlen(char *str)
+static size_t	ft_strlen(char *str)
 {
 	size_t	i;
 

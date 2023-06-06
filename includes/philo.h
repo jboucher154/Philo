@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:49:17 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/06 16:28:27 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:34:29 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void		vitals_monitor(t_diner *diner);
 //utilities_one
 int			ft_atoi(const char *str);
 int			print_error(char *err_msg);
-size_t		ft_strlen(char *str);
 
 //utilities_two
 long long	get_current_time(void);

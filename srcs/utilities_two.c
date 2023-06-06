@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 09:31:22 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 13:49:32 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:43:08 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,22 @@ long long	get_current_time(void)
 	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
 }
 
-suseconds_t	get_current_time_micro(void)
+static unsigned long long	get_current_time_micro(void)
 {
 	struct timeval	current_time;
 
 	gettimeofday(&current_time, NULL);
-	return (current_time.tv_sec * 1000000 + current_time.tv_usec);
+	return (((unsigned long long)current_time.tv_sec * 1000000ULL) + \
+	current_time.tv_usec);
 }
 
 int	please_wait(int milli_to_wait, t_phil *phil)
 {
-	suseconds_t	end;
+	unsigned long long	end;
+	unsigned long long	to_wait;
 
-	end = get_current_time_micro() + (milli_to_wait * 1000);
+	to_wait = (unsigned long long)milli_to_wait * 1000ULL;
+	end = get_current_time_micro() + to_wait;
 	while (get_current_time_micro() < end)
 	{
 		usleep(500);

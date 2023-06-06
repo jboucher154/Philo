@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 10:02:04 by jebouche          #+#    #+#             */
-/*   Updated: 2023/06/05 13:48:36 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:40:52 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_vitals(t_phil *phil)
 	return (ALIVE);
 }
 
-int	set_full(t_phil *phil)
+static int	set_full(t_phil *phil)
 {
 	pthread_mutex_lock(&(phil->shared->full_mutex));
 	phil->shared->full_phils += 1;
@@ -35,7 +35,7 @@ int	set_full(t_phil *phil)
 	return (check_vitals(phil));
 }
 
-int	pick_up_forks(t_phil *phil)
+static int	pick_up_forks(t_phil *phil)
 {
 	pthread_mutex_lock(&(phil->left_fork));
 	if (check_vitals(phil) == DEAD)
@@ -53,7 +53,7 @@ int	pick_up_forks(t_phil *phil)
 	return (check_vitals(phil));
 }
 
-int	eat(t_phil *phil)
+static int	eat(t_phil *phil)
 {
 	if (check_vitals(phil) == DEAD)
 		return (DEAD);

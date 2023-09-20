@@ -1,5 +1,5 @@
 
-# The Dining an Dying Philosophers, with Threads and Mutexes
+# The Dining & Dying Philosophers, with Threads and Mutexes
 
 ## Introduction
 
